@@ -71,8 +71,9 @@ export default function DisplayData() {
         <p className="my-4 text-center">
           It's your time to{' '}
           <span className="my-2 rounded bg-purple-600 px-2 py-1 text-white">
-            {' '}
-            Start{' '}
+            <Link href="/">
+              <a>Start</a>
+            </Link>
           </span>{' '}
         </p>
       </main>
