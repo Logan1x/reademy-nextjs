@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import firebase from '../firebase/firebase'
+import firebase from '../../../utility/firebase/firebase'
 
 export default function DisplayData() {
   const [loading, setLoading] = useState(false)

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import firebase from '../firebase/firebase'
+import firebase from '../../../utility/firebase/firebase'
 import toast, { Toaster } from 'react-hot-toast'
 
 export default function InputForm() {
