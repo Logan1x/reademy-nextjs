@@ -1,10 +1,11 @@
 import { useState } from 'react'
-
+import { useRouter } from 'next/router'
 import firebase from '../firebase/firebase'
-
 import toast, { Toaster } from 'react-hot-toast'
 
 export default function InputForm() {
+  const router = useRouter()
+
   const [readerName, setReaderName] = useState('')
   const [readerEmail, setReaderEmail] = useState('')
   const [bookName, setBookName] = useState('')
@@ -21,26 +22,6 @@ export default function InputForm() {
     toast.error("This didn't work.", {
       position: 'bottom-center',
     })
-
-  function formSubmit(e) {
-    e.preventDefault()
-    firebase
-      .firestore()
-      .collection('times')
-      .add({
-        uid,
-        title,
-        textdata,
-      })
-      .then(() => {
-        setTitle('')
-        setTextdata('')
-        successNotify()
-      })
-      .catch((error) => {
-        errorNotify()
-      })
-  }
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -65,8 +46,12 @@ export default function InputForm() {
             setBookName(''),
             setRadioInput(''),
             setTwitterid('')
-          console.log('success')
-          notify()
+          // console.log('success')
+          successNotify()
+          setTimeout(router.push('/components/display/displayData'), 2000)
+        })
+        .catch((error) => {
+          errorNotify()
         })
     }
   }
