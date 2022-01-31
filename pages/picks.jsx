@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import firebase from '../../../utility/firebase/firebase'
+import firebase from '../utility/firebase/firebase'
+import Header from '../components/header'
+import Footer from '../components/footer'
 
 export default function DisplayData() {
   const [loading, setLoading] = useState(false)
@@ -28,19 +30,14 @@ export default function DisplayData() {
   // console.log(times)
 
   return (
-    <div className='className="flex py-2" min-h-screen flex-col items-center justify-center'>
+    <div className='className="flex py-2" min-h-screen flex-col items-center justify-center bg-gray-50'>
       <Head>
         <title>Books | Reademy</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <nav className="flex h-12 w-full items-center justify-around border-b bg-gray-900 text-gray-50">
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-        <Link href="/components/display/displayData">
-          <a>Shelf</a>
-        </Link>
-      </nav>
+
+      <Header />
+
       <main className=" mx-4 my-2 md:mx-auto md:w-3/5 ">
         <p className="my-4 text-center text-2xl">
           {' '}
@@ -50,11 +47,11 @@ export default function DisplayData() {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <div className="flex flex-wrap items-center justify-center gap-2">
+          <div className="flex flex-wrap items-baseline justify-center gap-2">
             {times.map((time) => (
               <div
                 key={time.id}
-                className="h-28 w-60 overflow-hidden rounded border border-2 bg-gray-100 p-2 text-center hover:shadow-lg"
+                className="w-60 overflow-hidden rounded border border-2 bg-gray-100 p-2 text-center hover:shadow-lg"
               >
                 <h3>{time.bookName}</h3>
                 <p>{time.readerName} </p>
@@ -68,24 +65,16 @@ export default function DisplayData() {
             ))}
           </div>
         )}
-        <p className="my-4 text-center">
+        <p className="my-4  text-center">
           It's your time to{' '}
-          <span className="my-2 rounded bg-purple-600 px-2 py-1 text-white">
+          <span className="text-purple-700 underline">
             <Link href="/">
-              <a>Start</a>
+              <a>Start </a>
             </Link>
-          </span>{' '}
-        </p>
-      </main>
-      <footer className="flex h-12 w-full items-center justify-center border-t">
-        <p>
-          Developed By{' '}
-          <span className="cursor-pointer text-blue-500 underline hover:no-underline">
-            {' '}
-            <a href="https://logan1x.github.io">Logan1x</a>{' '}
           </span>
         </p>
-      </footer>
+      </main>
+      <Footer />
     </div>
   )
 }

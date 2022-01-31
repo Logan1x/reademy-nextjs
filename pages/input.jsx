@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import firebase from '../../../utility/firebase/firebase'
+import firebase from '../utility/firebase/firebase'
 import toast, { Toaster } from 'react-hot-toast'
 
 export default function InputForm() {
   const router = useRouter()
 
   const [readerName, setReaderName] = useState('')
-  const [readerEmail, setReaderEmail] = useState('')
   const [bookName, setBookName] = useState('')
   const [radioInput, setRadioInput] = useState('')
   const [twitterid, setTwitterid] = useState('')
@@ -34,7 +33,6 @@ export default function InputForm() {
         .collection('books')
         .add({
           readerName,
-          readerEmail,
           bookName,
           radioInput,
           twitterid,
@@ -42,13 +40,12 @@ export default function InputForm() {
         })
         .then(() => {
           setReaderName(''),
-            setReaderEmail(''),
             setBookName(''),
             setRadioInput(''),
             setTwitterid('')
           // console.log('success')
           successNotify()
-          setTimeout(router.push('/components/display/displayData'), 2000)
+          setTimeout(router.push('/picks'), 2000)
         })
         .catch((error) => {
           errorNotify()
@@ -71,18 +68,6 @@ export default function InputForm() {
         value={readerName}
         onChange={(e) => setReaderName(e.target.value)}
         className="border-1 w-full rounded border border-gray-900 px-2 py-1 text-gray-700 md:w-auto "
-        required
-      />
-      <label htmlFor="">
-        Email<span className="text-red-500">*</span>
-      </label>
-      <input
-        type="email"
-        name="email"
-        placeholder="yourname@example.com"
-        value={readerEmail}
-        onChange={(e) => setReaderEmail(e.target.value)}
-        className="border-1 w-full rounded border border-gray-900 px-2 py-1 text-gray-700 md:w-auto"
         required
       />
       <label htmlFor="">

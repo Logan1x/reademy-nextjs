@@ -1,4 +1,4 @@
-import InputForm from './input.jsx'
+import InputForm from '../pages/input.jsx'
 
 export default function ShowChallangeInfo() {
   const monthNames = [
