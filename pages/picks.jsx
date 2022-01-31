@@ -47,14 +47,14 @@ export default function DisplayData() {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <div className="flex flex-wrap items-baseline justify-center gap-2">
+          <div className="flex flex-wrap items-stretch justify-center gap-2">
             {times.map((time) => (
               <div
                 key={time.id}
                 className="w-60 overflow-hidden rounded border border-2 bg-gray-100 p-2 text-center hover:shadow-lg"
               >
-                <h3>{time.bookName}</h3>
-                <p>{time.readerName} </p>
+                <h3 className="text-gray-900">{time.bookName}</h3>
+                <p className="text-neutral-400">{time.readerName} </p>
                 <p className="text-xs"> {time.radioInput}</p>
                 {time.twitterid != '' ? (
                   <p className="text-xs"> @{time.twitterid}</p>
@@ -67,7 +67,7 @@ export default function DisplayData() {
         )}
         <p className="my-4  text-center">
           It's your time to{' '}
-          <span className="text-purple-700 underline">
+          <span className="font-semibold text-purple-600 underline hover:no-underline">
             <Link href="/">
               <a>Start </a>
             </Link>
