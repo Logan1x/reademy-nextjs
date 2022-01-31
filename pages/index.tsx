@@ -1,7 +1,8 @@
 import Head from 'next/head'
-import Link from 'next/link'
 
-import ShowChallangeInfo from "./components/inputForm/showChallangeInfo";
+import ShowChallangeInfo from "../components/showChallangeInfo";
+import Header from "../components/header";
+import Footer from "../components/footer";
 
 export default function Home() {
 
@@ -14,23 +15,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.png" />
       </Head>
 
-      <nav className="flex h-12 w-full items-center justify-around border-b bg-gray-900 text-gray-50">
-      <Link href="/">
-          <a>Home</a>
-        </Link>
-      <Link href="/components/display/displayData">
-          <a>Shelf</a>
-        </Link>
-      </nav>
+      <Header />
 
       <main>
       
       <ShowChallangeInfo/>
       </main>
 
-      <footer className="flex h-12 w-full items-center justify-center border-t">
-        <p>Developed By <span className='underline text-blue-500 hover:no-underline cursor-pointer'> <a href="https://logan1x.github.io">Logan1x</a> </span></p>
-      </footer>
+     <Footer />
     </div>
   )
 }
