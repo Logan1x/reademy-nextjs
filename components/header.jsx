@@ -10,8 +10,8 @@ export default function Header() {
         <Link href="/picks">
           <a className="hover:underline">Picks</a>
         </Link>
-        <Link href="https://discord.gg/fBNnvYK8ZZ">
-          <a className="hover:underline">Discord</a>
+        <Link href="https://twitter.com/ReademyCafe">
+          <a className="hover:underline">Twitter</a>
         </Link>
       </div>
     </nav>
