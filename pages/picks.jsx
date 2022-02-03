@@ -32,7 +32,7 @@ export default function DisplayData() {
   return (
     <div className='className="flex py-2" min-h-screen flex-col items-center justify-center bg-gray-50'>
       <Head>
-        <title>Books | Reademy</title>
+        <title>Book Picks | Reademy</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
 
