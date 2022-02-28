@@ -42,6 +42,7 @@ export default function InputForm() {
           radioInput,
           twitterid,
           month: new Date().getMonth(),
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(() => {
           setReaderName(''),
