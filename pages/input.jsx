@@ -24,8 +24,10 @@ export default function InputForm() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    if (radioInput === '') {
-      setError('Please select a radio button')
+    if (readerName.length < 2 || bookName.length < 2 || twitterid.length < 2) {
+      setError('Please enter a valid input of at least 2 characters')
+    } else if (radioInput === '') {
+      setError('Please select a Club')
     } else {
       setError('')
       firebase
