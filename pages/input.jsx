@@ -139,6 +139,7 @@ export default function InputForm() {
         onChange={(e) => setTwitterid(e.target.value)}
         className="border-1 w-full rounded border border-gray-900 px-2 py-1 text-gray-700 md:w-auto"
       />
+      <small className="text-red-500">{error}</small>
       <button
         className="my-2 rounded bg-purple-600 px-2 py-1 text-white"
         type="submit"
