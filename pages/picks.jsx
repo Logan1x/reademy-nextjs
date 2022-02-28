@@ -3,11 +3,17 @@ import Head from 'next/head'
 import Link from 'next/link'
 import firebase from '../utility/firebase/firebase'
 import Header from '../components/header'
-import Footer from '../components/footer'
 
 export default function DisplayData() {
   const [loading, setLoading] = useState(false)
   const [times, setTimes] = useState([])
+
+  const cardShadowColor = {
+    Adulting: 'hover:shadow-red-400 border-b-red-300',
+    Curiosity: 'hover:shadow-yellow-400 border-b-yellow-400',
+    Fun: 'hover:shadow-purple-400 border-b-purple-400',
+    Escape: 'hover:shadow-indigo-400 border-b-indigo-400',
+  }
 
   useEffect(() => {
     setLoading(true)
@@ -19,20 +25,16 @@ export default function DisplayData() {
           id: doc.id,
           ...doc.data(),
         }))
-        // console.log(newTimes)
         setTimes(newTimes)
-        // console.log(times)
       })
     setLoading(false)
     return unsubscribe
   }, [])
 
-  // console.log(times)
-
   return (
     <div className='className="flex py-2" min-h-screen flex-col items-center justify-center bg-gray-50'>
       <Head>
-        <title>Books | Reademy</title>
+        <title>Book Picks | Reademy</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
 
@@ -51,7 +53,9 @@ export default function DisplayData() {
             {times.map((time) => (
               <div
                 key={time.id}
-                className="w-60 overflow-hidden rounded border border-2 bg-gray-100 p-2 text-center hover:shadow-lg"
+                className={`w-60 overflow-hidden rounded border border-2 bg-gray-100 p-2 text-center hover:shadow ${
+                  cardShadowColor[time.radioInput]
+                }`}
               >
                 <h3 className="text-gray-900">{time.bookName}</h3>
                 <p className="text-neutral-400">{time.readerName} </p>
@@ -67,14 +71,13 @@ export default function DisplayData() {
         )}
         <p className="my-4  text-center">
           It's your time to{' '}
-          <span className="font-semibold text-purple-600 underline hover:no-underline">
+          <span className="text-purple-600 underline hover:font-semibold hover:no-underline">
             <Link href="/">
               <a>Start </a>
             </Link>
           </span>
         </p>
       </main>
-      <Footer />
     </div>
   )
 }
