@@ -91,7 +91,6 @@ export default function InputForm() {
       <label htmlFor="">
         Clubs<span className="text-red-500">*</span>{' '}
       </label>
-      <small className="text-red-500">{error}</small>
       <label htmlFor="">
         <input
           type="radio"
