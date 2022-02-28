@@ -93,7 +93,7 @@ export default function InputForm() {
           value={'Adulting'}
           onChange={(e) => setRadioInput(e.target.value)}
         />{' '}
-        <span className="rounded bg-red-100 px-2 py-1 text-sm text-red-500">
+        <span className="rounded bg-red-100 px-2 py-1 text-sm text-red-700">
           Adulting
         </span>
       </label>
@@ -104,7 +104,7 @@ export default function InputForm() {
           value={'Escape'}
           onChange={(e) => setRadioInput(e.target.value)}
         />{' '}
-        <span className="rounded bg-indigo-100 px-2 py-1 text-sm text-indigo-500">
+        <span className="rounded bg-indigo-100 px-2 py-1 text-sm text-indigo-700">
           Escape
         </span>{' '}
       </label>
@@ -115,7 +115,7 @@ export default function InputForm() {
           value={'Fun'}
           onChange={(e) => setRadioInput(e.target.value)}
         />{' '}
-        <span className="rounded bg-purple-100 px-2 py-1 text-sm text-purple-500">
+        <span className="rounded bg-purple-100 px-2 py-1 text-sm text-purple-700">
           Fun
         </span>{' '}
       </label>
@@ -126,7 +126,7 @@ export default function InputForm() {
           value={'Curiosity'}
           onChange={(e) => setRadioInput(e.target.value)}
         />{' '}
-        <span className="rounded bg-yellow-100 px-2 py-1 text-sm text-yellow-500">
+        <span className="rounded bg-yellow-100 px-2 py-1 text-sm text-yellow-700">
           Curiosity
         </span>{' '}
       </label>
