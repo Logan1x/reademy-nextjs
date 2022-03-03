@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import firebase from '../utility/firebase/firebase'
 import toast, { Toaster } from 'react-hot-toast'
@@ -11,6 +11,8 @@ export default function InputForm() {
   const [radioInput, setRadioInput] = useState('')
   const [twitterid, setTwitterid] = useState('')
   const [error, setError] = useState('')
+
+  // toast notication on submit
 
   const successNotify = () =>
     toast.success('Successfully created!', {
@@ -39,6 +41,8 @@ export default function InputForm() {
     setTwitterid(userData.twitterid)
   }
 
+  // Save to firebase
+
   function handleSubmit(e) {
     e.preventDefault()
     if (twitterid != '' && twitterid[0] === '@') {
@@ -47,7 +51,7 @@ export default function InputForm() {
     if (readerName.length < 2 || bookName.length < 2 || twitterid.length < 2) {
       setError('Please enter a valid input of at least 2 characters')
     } else if (radioInput === '') {
-      setError('Please select a Club')
+      setError('Please select a Club Theme')
     } else {
       setError('')
       firebase
@@ -70,8 +74,10 @@ export default function InputForm() {
             month: new Date().getMonth(),
           }
           saveToLocalStorage(dataLocal)
-            setTwitterid('')
-          // console.log('success')
+          setReaderName('')
+          setBookName('')
+          setRadioInput('')
+          setTwitterid('')
           successNotify()
           setTimeout(router.push('/picks'), 2000)
         })
@@ -125,6 +131,7 @@ export default function InputForm() {
           name="Clubs"
           value={'Adulting'}
           onChange={(e) => setRadioInput(e.target.value)}
+          checked={radioInput === 'Adulting'}
         />{' '}
         <span className="rounded bg-red-100 px-2 py-1 text-sm text-red-700">
           Adulting
@@ -136,6 +143,7 @@ export default function InputForm() {
           name="Clubs"
           value={'Escape'}
           onChange={(e) => setRadioInput(e.target.value)}
+          checked={radioInput === 'Escape'}
         />{' '}
         <span className="rounded bg-indigo-100 px-2 py-1 text-sm text-indigo-700">
           Escape
@@ -147,6 +155,7 @@ export default function InputForm() {
           name="Clubs"
           value={'Fun'}
           onChange={(e) => setRadioInput(e.target.value)}
+          checked={radioInput === 'Fun'}
         />{' '}
         <span className="rounded bg-purple-100 px-2 py-1 text-sm text-purple-700">
           Fun
@@ -158,6 +167,7 @@ export default function InputForm() {
           name="Clubs"
           value={'Curiosity'}
           onChange={(e) => setRadioInput(e.target.value)}
+          checked={radioInput === 'Curiosity'}
         />{' '}
         <span className="rounded bg-yellow-100 px-2 py-1 text-sm text-yellow-700">
           Curiosity
@@ -174,7 +184,7 @@ export default function InputForm() {
       />
       <small className="text-red-500">{error}</small>
       <button
-        className="my-2 rounded bg-purple-600 px-2 py-1 text-white"
+        className="my-2 w-full rounded bg-purple-600 px-2 py-1 text-white md:w-auto"
         type="submit"
       >
         Submit
