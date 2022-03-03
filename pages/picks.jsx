@@ -59,7 +59,11 @@ export default function DisplayData() {
               <p className="text-neutral-400">{time.readerName} </p>
               <p className="text-xs"> {time.radioInput}</p>
               {time.twitterid != '' ? (
-                <p className="text-xs"> @{time.twitterid}</p>
+                <p className="cursor-pointer text-xs hover:text-[#1da1f2]">
+                  <a href={`https://twitter.com/${time.twitterid}`}>
+                    @{time.twitterid}
+                  </a>
+                </p>
               ) : (
                 ''
               )}
