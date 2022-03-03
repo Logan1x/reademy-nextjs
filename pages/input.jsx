@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import firebase from '../utility/firebase/firebase'
 import toast, { Toaster } from 'react-hot-toast'
@@ -12,6 +12,8 @@ export default function InputForm() {
   const [twitterid, setTwitterid] = useState('')
   const [error, setError] = useState('')
 
+  // toast notication on submit
+
   const successNotify = () =>
     toast.success('Successfully created!', {
       position: 'bottom-center',
@@ -22,6 +24,26 @@ export default function InputForm() {
       position: 'bottom-center',
     })
 
+  // Save to local storage
+
+  function saveToLocalStorage(data) {
+    localStorage.setItem('userData', JSON.stringify(data))
+  }
+
+  // Get from local storage
+
+  function getFromLocalStorage() {
+    const userData = JSON.parse(localStorage.getItem('userData'))
+
+    if (userData) {
+      setReaderName(userData.readerName)
+      setBookName(userData.bookName)
+      setTwitterid(userData.twitterid)
+    }
+  }
+
+  // Save to firebase
+
   function handleSubmit(e) {
     e.preventDefault()
     if (twitterid != '' && twitterid[0] === '@') {
@@ -30,7 +52,7 @@ export default function InputForm() {
     if (readerName.length < 3 || bookName.length < 3 || twitterid.length < 3) {
       setError('Please enter a valid input of at least 3 characters')
     } else if (radioInput === '') {
-      setError('Please select a Club')
+      setError('Please select a Club Theme')
     } else {
       setError('')
       firebase
@@ -45,11 +67,18 @@ export default function InputForm() {
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(() => {
-          setReaderName(''),
-            setBookName(''),
-            setRadioInput(''),
-            setTwitterid('')
-          // console.log('success')
+          const dataLocal = {
+            readerName,
+            bookName,
+            radioInput,
+            twitterid,
+            month: new Date().getMonth(),
+          }
+          saveToLocalStorage(dataLocal)
+          setReaderName('')
+          setBookName('')
+          setRadioInput('')
+          setTwitterid('')
           successNotify()
           setTimeout(router.push('/picks'), 2000)
         })
@@ -58,6 +87,12 @@ export default function InputForm() {
         })
     }
   }
+
+  // Get data from local storage
+
+  useEffect(() => {
+    getFromLocalStorage()
+  }, [])
 
   return (
     <form
@@ -97,6 +132,7 @@ export default function InputForm() {
           name="Clubs"
           value={'Adulting'}
           onChange={(e) => setRadioInput(e.target.value)}
+          checked={radioInput === 'Adulting'}
         />{' '}
         <span className="rounded bg-red-100 px-2 py-1 text-sm text-red-700">
           Adulting
@@ -108,6 +144,7 @@ export default function InputForm() {
           name="Clubs"
           value={'Escape'}
           onChange={(e) => setRadioInput(e.target.value)}
+          checked={radioInput === 'Escape'}
         />{' '}
         <span className="rounded bg-indigo-100 px-2 py-1 text-sm text-indigo-700">
           Escape
@@ -119,6 +156,7 @@ export default function InputForm() {
           name="Clubs"
           value={'Fun'}
           onChange={(e) => setRadioInput(e.target.value)}
+          checked={radioInput === 'Fun'}
         />{' '}
         <span className="rounded bg-purple-100 px-2 py-1 text-sm text-purple-700">
           Fun
@@ -130,6 +168,7 @@ export default function InputForm() {
           name="Clubs"
           value={'Curiosity'}
           onChange={(e) => setRadioInput(e.target.value)}
+          checked={radioInput === 'Curiosity'}
         />{' '}
         <span className="rounded bg-yellow-100 px-2 py-1 text-sm text-yellow-700">
           Curiosity
@@ -146,7 +185,7 @@ export default function InputForm() {
       />
       <small className="text-red-500">{error}</small>
       <button
-        className="my-2 rounded bg-purple-600 px-2 py-1 text-white"
+        className="my-2 w-full rounded bg-purple-600 px-2 py-1 text-white md:w-auto"
         type="submit"
       >
         Submit
