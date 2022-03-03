@@ -33,12 +33,13 @@ export default function InputForm() {
   // Get from local storage
 
   function getFromLocalStorage() {
-    console.log(JSON.parse(localStorage.getItem('userData')))
     const userData = JSON.parse(localStorage.getItem('userData'))
-    setReaderName(userData.readerName)
-    setBookName(userData.bookName)
-    // setRadioInput(userData.radioInput)
-    setTwitterid(userData.twitterid)
+
+    if (userData) {
+      setReaderName(userData.readerName)
+      setBookName(userData.bookName)
+      setTwitterid(userData.twitterid)
+    }
   }
 
   // Save to firebase
