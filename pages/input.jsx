@@ -47,10 +47,10 @@ export default function InputForm() {
   function handleSubmit(e) {
     e.preventDefault()
     if (twitterid != '' && twitterid[0] === '@') {
-      setTwitterid(twitterid.slice(1))
+      setTwitterid((twitterid) => twitterid.slice(1))
     }
-    if (readerName.length < 2 || bookName.length < 2 || twitterid.length < 2) {
-      setError('Please enter a valid input of at least 2 characters')
+    if (readerName.length < 3 || bookName.length < 3 || twitterid.length < 3) {
+      setError('Please enter a valid input of at least 3 characters')
     } else if (radioInput === '') {
       setError('Please select a Club Theme')
     } else {
