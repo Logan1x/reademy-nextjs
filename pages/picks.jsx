@@ -6,7 +6,7 @@ import Header from '../components/header'
 
 export default function DisplayData() {
   const [loading, setLoading] = useState(false)
-  const [times, setTimes] = useState([])
+  const [booksData, setBooksData] = useState([])
 
   const cardShadowColor = {
     Adulting: 'hover:shadow-red-400 border-b-red-300',
@@ -25,9 +25,9 @@ export default function DisplayData() {
           id: doc.id,
           ...doc.data(),
         }))
-        setTimes(newTimes)
+        setBooksData(newTimes)
+        setLoading(false)
       })
-    setLoading(false)
     return unsubscribe
   }, [])
 
@@ -46,29 +46,27 @@ export default function DisplayData() {
           What Others are reading...{' '}
         </p>
 
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <div className="flex flex-wrap items-stretch justify-center gap-2">
-            {times.map((time) => (
-              <div
-                key={time.id}
-                className={`w-60 overflow-hidden rounded border border-2 bg-gray-100 p-2 text-center hover:shadow ${
-                  cardShadowColor[time.radioInput]
-                }`}
-              >
-                <h3 className="text-gray-900">{time.bookName}</h3>
-                <p className="text-neutral-400">{time.readerName} </p>
-                <p className="text-xs"> {time.radioInput}</p>
-                {time.twitterid != '' ? (
-                  <p className="text-xs"> @{time.twitterid}</p>
-                ) : (
-                  ''
-                )}
-              </div>
-            ))}
-          </div>
-        )}
+        {loading ? <p className="text-center">Loading...</p> : ''}
+        <div className="flex flex-wrap items-stretch justify-center gap-2">
+          {booksData.map((time) => (
+            <div
+              key={time.id}
+              className={`w-60 overflow-hidden rounded border border-2 bg-gray-100 p-2 text-center hover:shadow ${
+                cardShadowColor[time.radioInput]
+              }`}
+            >
+              <h3 className="text-gray-900">{time.bookName}</h3>
+              <p className="text-neutral-400">{time.readerName} </p>
+              <p className="text-xs"> {time.radioInput}</p>
+              {time.twitterid != '' ? (
+                <p className="text-xs"> @{time.twitterid}</p>
+              ) : (
+                ''
+              )}
+            </div>
+          ))}
+        </div>
+
         <p className="my-4  text-center">
           It's your time to{' '}
           <span className="text-purple-600 underline hover:font-semibold hover:no-underline">

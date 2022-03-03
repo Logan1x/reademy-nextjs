@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Header() {
   return (
-    <nav className="flex h-12 w-full items-center justify-around border-b bg-gray-900 text-gray-50">
+    <nav className="flex h-12 w-full items-center justify-between border-b bg-gray-900 px-2 text-gray-50 md:justify-around">
       <Link href="/">
         <a className="hover:underline">Home</a>
       </Link>
