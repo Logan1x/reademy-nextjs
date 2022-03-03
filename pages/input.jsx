@@ -22,6 +22,23 @@ export default function InputForm() {
       position: 'bottom-center',
     })
 
+  // Save to local storage
+
+  function saveToLocalStorage(data) {
+    localStorage.setItem('userData', JSON.stringify(data))
+  }
+
+  // Get from local storage
+
+  function getFromLocalStorage() {
+    console.log(JSON.parse(localStorage.getItem('userData')))
+    const userData = JSON.parse(localStorage.getItem('userData'))
+    setReaderName(userData.readerName)
+    setBookName(userData.bookName)
+    // setRadioInput(userData.radioInput)
+    setTwitterid(userData.twitterid)
+  }
+
   function handleSubmit(e) {
     e.preventDefault()
     if (twitterid != '' && twitterid[0] === '@') {
@@ -45,9 +62,14 @@ export default function InputForm() {
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(() => {
-          setReaderName(''),
-            setBookName(''),
-            setRadioInput(''),
+          const dataLocal = {
+            readerName,
+            bookName,
+            radioInput,
+            twitterid,
+            month: new Date().getMonth(),
+          }
+          saveToLocalStorage(dataLocal)
             setTwitterid('')
           // console.log('success')
           successNotify()
@@ -58,6 +80,12 @@ export default function InputForm() {
         })
     }
   }
+
+  // Get data from local storage
+
+  useEffect(() => {
+    getFromLocalStorage()
+  }, [])
 
   return (
     <form
