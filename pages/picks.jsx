@@ -8,12 +8,16 @@ export default function DisplayData() {
   const [loading, setLoading] = useState(false)
   const [booksData, setBooksData] = useState([])
 
+  // card bottom border color and shadow color on hover
+
   const cardShadowColor = {
     Adulting: 'hover:shadow-red-400 border-b-red-300',
     Curiosity: 'hover:shadow-yellow-400 border-b-yellow-400',
     Fun: 'hover:shadow-purple-400 border-b-purple-400',
     Escape: 'hover:shadow-indigo-400 border-b-indigo-400',
   }
+
+  // get data from firebase
 
   useEffect(() => {
     setLoading(true)
@@ -33,9 +37,15 @@ export default function DisplayData() {
 
   return (
     <div className='className="flex py-2" min-h-screen flex-col items-center justify-center bg-gray-50'>
+      {/* Meta tag description */}
       <Head>
-        <title>Book Picks | Reademy</title>
         <link rel="icon" href="/favicon.png" />
+        <title>Book Picks | Reademy</title>
+        <meta name="title" content="Book Picks | Reademy" />
+        <meta
+          name="description"
+          content="List of all the book picks for current year"
+        />
       </Head>
 
       <Header />
@@ -58,7 +68,7 @@ export default function DisplayData() {
               <h3 className="text-gray-900">{time.bookName}</h3>
               <p className="text-neutral-400">{time.readerName} </p>
               <p className="text-xs"> {time.radioInput}</p>
-              {time.twitterid != '' ? (
+              {time.twitterid != '' && time.twitterid[0] != '@' ? (
                 <p className="cursor-pointer text-xs hover:text-[#1da1f2]">
                   <a href={`https://twitter.com/${time.twitterid}`}>
                     @{time.twitterid}
@@ -75,7 +85,7 @@ export default function DisplayData() {
           It's your time to{' '}
           <span className="text-purple-600 underline hover:font-semibold hover:no-underline">
             <Link href="/">
-              <a>Start </a>
+              <a>Start</a>
             </Link>
           </span>
         </p>
